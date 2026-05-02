@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautymark Gold &amp; Diamonds — Coming Soon</title>
+
+  <!--
+    Cinzel  — Roman-inscription luxury serif for the headline
+    Cormorant Garamond — tagline & editorial italic
+    Josefin Sans — UI / labels
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
+
+  <link rel="preload" as="image" href="6.jpg">
+  <link rel="preload" as="image" href="accura1.jpg">
+  <link rel="preload" as="image" href="dazzle.png">
+  <link rel="preload" as="image" href="gold2.png">
+  <link rel="preload" as="image" href="nyze1.jpg">
+  <link rel="preload" as="image" href="watch%2001.jpg">
+
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --teal:      #003E4E;
+      --teal-dark: #011a24;
+      --gold:      #FACE83;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--teal-dark);
+      font-family: 'Josefin Sans', sans-serif;
+    }
+
+    /* ════════════════════════════════════════════
+       LAYOUT — true side-by-side columns.
+       Left panel: solid teal, fades slightly at
+       its right edge. Right panel: product carousel
+       filling the remaining width, with a left-edge
+       gradient that dissolves into the left panel.
+    ════════════════════════════════════════════ */
+    body {
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* Left content column — fixed width, solid teal */
+    .left-panel {
+      position: relative;
+      z-index: 1;
+      width: 45%;
+      flex-shrink: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 44px 36px 44px;
+      overflow: hidden;
+      background:
+        linear-gradient(to bottom, #011a24 0%, rgba(1,26,36,0) 32%),
+        linear-gradient(to right,
+          #003E4E 0%,
+          #003E4E 55%,
+          rgba(0,62,78,0.85) 68%,
+          rgba(0,62,78,0.50) 80%,
+          rgba(0,62,78,0.18) 91%,
+          rgba(0,62,78,0.00) 100%
+        );
+    }
+
+    /* Right carousel panel — fills remaining viewport */
+    .right-panel {
+      position: relative;
+      flex: 1;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Ambient glow layers — give the teal depth */
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 55% at 88% 6%,  rgba(250,206,131,0.10) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 70% at 4%  96%, rgba(250,206,131,0.07) 0%, transparent 58%),
+        radial-gradient(ellipse 45% 35% at 45% 50%, rgba(250,206,131,0.03) 0%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+      animation: breathe 11s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.6; }
+    }
+
+    /* Background diamond watermark */
+    .panel-watermark {
+      position: absolute;
+      top: 50%; left: 48%;
+      transform: translate(-50%, -50%);
+      width: 78%; height: 78%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.05;
+    }
+
+    /* Corner accent — top right */
+    .accent-tr {
+      position: absolute;
+      top: 30px; right: 54px;
+      width: 62px; height: 62px;
+      opacity: 0.13;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Corner accent — bottom left */
+    .accent-bl {
+      position: absolute;
+      bottom: 26px; left: 38px;
+      width: 44px; height: 44px;
+      opacity: 0.09;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Every content block must be above the watermark */
+    .logo, .content, .bottom { position: relative; z-index: 1; }
+
+
+    /* ── Logo ── */
+    .logo { flex-shrink: 0; }
+
+    .logo-img {
+      height: 172px;
+      width: auto;
+      display: block;
+    }
+
+
+    /* ── Main content ── */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding-bottom: 2.5rem; /* keeps tagline away from bottom section */
+    }
+
+    /*
+      Cinzel — Roman-inspired, zero-italic, zero-gimmick luxury serif.
+      Used by high-end jewellery & couture because it echoes classical
+      stone-cut letterforms without looking "wedding-font".
+    */
+    .headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(3.2rem, 5vw, 6rem);
+      color: var(--gold);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+    }
+
+    .body-copy {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: rgba(250, 206, 131, 0.70);
+      max-width: 340px;
+      margin-top: 1.8rem;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    .tagline-wrap {
+      margin-top: 2.2rem;
+      display: inline-block;
+    }
+
+    .tagline {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.9rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: 0.015em;
+    }
+
+    .tagline-rule {
+      width: 140px;
+      height: 1px;
+      background: rgba(250, 206, 131, 0.42);
+      margin: 0 auto;
+    }
+
+
+    /* ── Bottom — Collections + Socials ── */
+    .bottom {
+      flex-shrink: 0;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(250, 206, 131, 0.12);
+    }
+
+    .collection-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 22px;
+    }
+
+    /* White-on-transparent logos → brand gold via filter chain */
+    .col-logo {
+      height: 52px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+      filter: brightness(0) invert(70%) sepia(100%) saturate(150%) brightness(95%);
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+    }
+
+    /* ── Entrance animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .headline {
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.15s;
+    }
+
+    .body-copy {
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.45s;
+    }
+
+    .tagline-wrap {
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.75s;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      color: rgba(250, 206, 131, 0.48);
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover { color: var(--gold); }
+    .social-link svg   { width: 20px; height: 20px; }
+
+
+    /* ════════════════════════════════════════════
+       RIGHT PANEL — CAROUSEL
+    ════════════════════════════════════════════ */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 900ms ease;
+      will-change: opacity;
+    }
+
+    .slide.active { opacity: 1; }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Left-edge gradient blends carousel into the left panel */
+    .carousel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right,
+        rgba(0, 62, 78, 1.00)  0%,
+        rgba(0, 62, 78, 0.80) 12%,
+        rgba(0, 62, 78, 0.45) 28%,
+        rgba(0, 62, 78, 0.14) 46%,
+        transparent           62%
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Cinematic vignette — darkens image edges for depth */
+    .carousel-vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.30) 0%,   transparent 22%),
+        linear-gradient(to top,    rgba(0,0,0,0.35) 0%,   transparent 28%),
+        linear-gradient(to left,   rgba(0,0,0,0.25) 0%,   transparent 18%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Controls */
+    .carousel-controls {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-dashes {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-dash {
+      height: 2px;
+      width: 24px;
+      background: rgba(255,255,255,0.28);
+      cursor: pointer;
+      transition: width 0.4s ease, background 0.4s ease;
+      flex-shrink: 0;
+      border: none;
+      padding: 0;
+    }
+
+    .nav-dash.active { width: 42px; background: rgba(255,255,255,0.88); }
+
+    .slide-counter {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.52);
+      white-space: nowrap;
+    }
+
+
+    /* ════════════════════════════════════════════
+       MOBILE  < 768px
+    ════════════════════════════════════════════ */
+    @media (max-width: 767px) {
+      body { display: flex; flex-direction: column; position: static; }
+
+      .right-panel {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: 40vh;
+        order: 2;
+      }
+
+      .left-panel {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        order: 1;
+        padding: 26px 26px 20px;
+        background: #003E4E; /* solid on mobile — no bleed needed */
+      }
+
+      .left-panel::before { display: none; }
+
+      .logo-img    { height: 110px; }
+      .headline    { font-size: clamp(3rem, 13vw, 5rem); }
+      .body-copy   { font-size: 0.88rem; margin-top: 1rem; max-width: 100%; }
+      .tagline     { font-size: 1.4rem; }
+      .tagline-wrap { margin-top: 1rem; }
+      .content     { padding-bottom: 1rem; }
+      .col-logo    { height: 36px; }
+      .collection-logos { gap: 20px; }
+      .accent-tr, .accent-bl { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ LEFT PANEL ══ -->
+  <aside class="left-panel">
+
+    <!-- Diamond watermark — large, centered, barely visible -->
+    <svg class="panel-watermark" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+      <path d="M200 8 L392 200 L200 392 L8 200 Z"   stroke="#FACE83" stroke-width="0.9"/>
+      <path d="M200 55 L345 200 L200 345 L55 200 Z"  stroke="#FACE83" stroke-width="0.65"/>
+      <line x1="55"  y1="200" x2="345" y2="200"     stroke="#FACE83" stroke-width="0.35"/>
+      <line x1="200" y1="55"  x2="200" y2="345"     stroke="#FACE83" stroke-width="0.35"/>
+      <line x1="200" y1="8"   x2="200" y2="34"      stroke="#FACE83" stroke-width="0.6"/>
+      <line x1="200" y1="366" x2="200" y2="392"     stroke="#FACE83" stroke-width="0.6"/>
+      <line x1="8"   y1="200" x2="34"  y2="200"     stroke="#FACE83" stroke-width="0.6"/>
+      <line x1="366" y1="200" x2="392" y2="200"     stroke="#FACE83" stroke-width="0.6"/>
+    </svg>
+
+    <!-- Corner accent — top right -->
+    <svg class="accent-tr" viewBox="0 0 70 70" fill="none" aria-hidden="true">
+      <path d="M35 2 L68 35 L35 68 L2 35 Z"  stroke="#FACE83" stroke-width="1"/>
+      <path d="M35 14 L56 35 L35 56 L14 35 Z" stroke="#FACE83" stroke-width="0.65"/>
+    </svg>
+
+    <!-- Corner accent — bottom left -->
+    <svg class="accent-bl" viewBox="0 0 55 55" fill="none" aria-hidden="true">
+      <path d="M27 2 L53 27 L27 53 L2 27 Z" stroke="#FACE83" stroke-width="1"/>
+    </svg>
+
+    <!-- Logo -->
+    <div class="logo">
+      <img class="logo-img" src="logo-transparent.png" alt="Beautymark Gold &amp; Diamonds">
+    </div>
+
+    <!-- Headline · Body · Tagline -->
+    <div class="content">
+      <h1 class="headline">Coming<br>Soon.</h1>
+
+      <p class="body-copy">
+        We are crafting a digital experience that reflects our world-class standard.
+        Something extraordinary is arriving.
+      </p>
+
+      <div class="tagline-wrap">
+        <span class="tagline">Specifically for you</span>
+        <div class="tagline-rule"></div>
+      </div>
+    </div>
+
+    <!-- Collections · Socials -->
+    <div class="bottom">
+      <div class="collection-logos">
+        <img class="col-logo" src="col-logo-1.png" alt="Collection">
+        <img class="col-logo" src="col-logo-2.png" alt="Collection">
+        <img class="col-logo" src="col-logo-3.png" alt="Collection">
+      </div>
+
+      <div class="socials">
+        <a class="social-link"
+           href="https://www.instagram.com/beautymarkgoldanddiamonds/"
+           target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a class="social-link"
+           href="https://www.facebook.com/goldbmg/"
+           target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <!-- ══ RIGHT PANEL — full-viewport carousel behind left panel ══ -->
+  <section class="right-panel" id="carouselPanel">
+    <div class="carousel">
+
+      <div class="slide active">
+        <img src="6.jpg" alt="Jewellery" loading="eager">
+      </div>
+      <div class="slide">
+        <img src="accura1.jpg" alt="Jewellery" loading="eager">
+      </div>
+      <div class="slide">
+        <img src="dazzle.png" alt="Jewellery" loading="eager">
+      </div>
+      <div class="slide">
+        <img src="gold2.png" alt="Jewellery" loading="eager">
+      </div>
+      <div class="slide">
+        <img src="nyze1.jpg" alt="Jewellery" loading="eager">
+      </div>
+      <div class="slide">
+        <img src="watch 01.jpg" alt="Jewellery" loading="eager">
+      </div>
+
+      <div class="carousel-overlay"  aria-hidden="true"></div>
+      <div class="carousel-vignette" aria-hidden="true"></div>
+
+      <div class="carousel-controls" role="navigation" aria-label="Carousel navigation">
+        <div class="nav-dashes" id="navDashes">
+          <button class="nav-dash active" data-index="0" aria-label="Slide 1"></button>
+          <button class="nav-dash"        data-index="1" aria-label="Slide 2"></button>
+          <button class="nav-dash"        data-index="2" aria-label="Slide 3"></button>
+          <button class="nav-dash"        data-index="3" aria-label="Slide 4"></button>
+          <button class="nav-dash"        data-index="4" aria-label="Slide 5"></button>
+          <button class="nav-dash"        data-index="5" aria-label="Slide 6"></button>
+        </div>
+        <span class="slide-counter" id="slideCounter" aria-live="polite">01 / 06</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <script>
+    (function () {
+      const slides  = document.querySelectorAll('.slide');
+      const dashes  = document.querySelectorAll('.nav-dash');
+      const counter = document.getElementById('slideCounter');
+      const panel   = document.getElementById('carouselPanel');
+      const total   = slides.length;
+      let current   = 0, timer = null;
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+      function goTo(index) {
+        slides[current].classList.remove('active');
+        dashes[current].classList.remove('active');
+        current = ((index % total) + total) % total;
+        slides[current].classList.add('active');
+        dashes[current].classList.add('active');
+        counter.textContent = pad(current + 1) + ' / ' + pad(total);
+      }
+
+      function start() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(function () { goTo(current + 1); }, 5000);
+      }
+
+      function stop() { clearInterval(timer); timer = null; }
+
+      dashes.forEach(function (d) {
+        d.addEventListener('click', function () {
+          stop();
+          goTo(parseInt(d.dataset.index, 10));
+          start();
+        });
+      });
+
+      panel.addEventListener('mouseenter', stop);
+      panel.addEventListener('mouseleave', start);
+
+      start();
+    }());
+  </script>
+
+</body>
+</html>
